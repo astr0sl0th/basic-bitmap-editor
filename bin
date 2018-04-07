@@ -33,3 +33,19 @@ function createBitmap(bitmap, N, M) {
     );
     return bitmap;
 }
+
+function paintPixel(bitmap, X, Y, C) {
+    // correct for offset 1 instead of 0
+    const x = X - 1;
+    const y = Y - 1;
+    if (x >= bitmap[0].length || y >= bitmap.length) {
+        console.error(`trying to draw outside the bitmap, coordinates ${x}/${y} don't exists`);
+        return bitmap;
+    }
+    if (typeof C !== 'string' || C.length > 1) {
+        console.error(`trying to draw without a correct color. color ${C} is not allowed`);
+        return bitmap;
+    }
+    bitmap[y][x] = C;
+    return bitmap;
+}
