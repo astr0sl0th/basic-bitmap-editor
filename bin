@@ -15,3 +15,21 @@ fs.readFile(inputFile || '', 'utf8', (err, data) => { //Read in supplied file
     }
 
 });
+
+
+function createBitmap(bitmap, N, M) {
+    // Do not allow N X M to be grater than 250 x 250
+    N = Math.min(+N, 250)
+    M = Math.min(+M, 250)
+    bitmap = Array.from({
+            length: M
+        },
+        () =>
+        Array.from({
+                length: N
+            },
+            () => 'O'
+        )
+    );
+    return bitmap;
+}
