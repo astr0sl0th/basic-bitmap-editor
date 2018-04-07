@@ -71,3 +71,26 @@ function paintPixel(bitmap, X, Y, C) {
     bitmap[y][x] = C;
     return bitmap;
 }
+
+function horizontal(bitmap, X1, X2, Y, C) {
+    for (let pos = +X1; pos <= +X2; pos += 1) {
+        bitmap = paintPixel(bitmap, pos, Y, C);
+    }
+    return bitmap;
+}
+
+function vertical(bitmap, X, Y1, Y2, C) {
+    for (let pos = +Y1; pos <= +Y2; pos += 1) {
+        bitmap = paintPixel(bitmap, +X, pos, C);
+    }
+    return bitmap;
+}
+
+function drawBitmap(bitmap) {
+    const string = bitmap.reduce((string, row) => {
+        string += row.join('') + '\n';
+        return string;
+    }, '');
+    console.log(string);
+    return bitmap;
+}
