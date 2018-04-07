@@ -17,6 +17,28 @@ fs.readFile(inputFile || '', 'utf8', (err, data) => { //Read in supplied file
 });
 
 
+const commands = {
+    I: createBitmap,
+    C: createBitmap,
+    S: drawBitmap,
+    L: paintPixel,
+    H: horizontal,
+    V: vertical
+};
+
+function parseCommandFile(rawData) {
+    let bitmap;
+    const inputCommands = rawData.split('\n').map(line => line.split(' '));
+    for (const cmdLine of inputCommands) {
+        const [cmd, ...args] = cmdLine;
+        try {
+            bitmap = commands[cmd](bitmap, ...args);
+        } catch (e) {
+            console.error(`command ${cmd} did not receive the required parameters!`)
+        }
+    }
+}
+
 function createBitmap(bitmap, N, M) {
     // Do not allow N X M to be grater than 250 x 250
     N = Math.min(+N, 250)
