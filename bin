@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const fs = require('fs');
+
+
+const inputFile = process.argv[2] // Returns array of command line arguments
+fs.readFile(inputFile || '', 'utf8', (err, data) => { //Read in supplied file
+    if (err) {
+        console.log('Incorrect file path')
+    } else {
+        parseCommandFile(data);
+
+    }
+
+});
